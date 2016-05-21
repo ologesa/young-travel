@@ -8,9 +8,9 @@
     "test": "tests"
   },
   "scripts": {
-    "build": "ember build",
+    "build": "node_modules/ember-cli/bin/ember build",
     "start": "ember server",
-    "test": "ember test"
+    "test": "node_modules/ember-cli/bin/ember test"
   },
   "repository": "",
   "engines": {
@@ -39,5 +39,8 @@
     "ember-load-initializers": "^0.5.1",
     "ember-resolver": "^2.0.3",
     "loader.js": "^4.0.1"
+  },
+  "dependencies": {
+    "ember-cli": "2.5.0"
   }
 }
