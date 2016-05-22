@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "ember build",
-    "start": "ember server",
+    "start": "ember fastboot",
     "test": "ember test",
     "postinstall": "bower install"
   },
@@ -20,6 +20,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+
   },
   "dependencies": {
     "bower": "^1.7.9",
@@ -29,6 +30,7 @@
     "ember-cli-app-version": "^1.0.0",
     "ember-cli-babel": "^5.1.6",
     "ember-cli-dependency-checker": "^1.2.0",
+    "ember-cli-fastboot": "1.0.0-beta.2",
     "ember-cli-htmlbars": "^1.0.3",
     "ember-cli-htmlbars-inline-precompile": "^0.3.1",
     "ember-cli-inject-live-reload": "^1.4.0",
@@ -41,8 +43,8 @@
     "ember-data": "^2.5.0",
     "ember-export-application-global": "^1.0.5",
     "ember-load-initializers": "^0.5.1",
+    "ember-network": "0.3.0",
     "ember-resolver": "^2.0.3",
-    "loader.js": "^4.0.1",
-    "watchman" : "^0.1.8"
+    "loader.js": "^4.0.1"
   }
 }
