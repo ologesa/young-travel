@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "ember build",
-    "start": "ember fastboot --environment=production --port=${PORT}",
+    "start": "ember fastboot --port=${PORT} --serve-assets",
     "test": "ember test",
     "postinstall": "bower install"
   },
