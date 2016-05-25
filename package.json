@@ -1,6 +1,6 @@
 {
   "name": "young-travel",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Small description for young-travel goes here",
   "private": true,
   "directories": {
@@ -21,8 +21,7 @@
   "license": "MIT",
   "devDependencies": {
     "ember-cli-inject-live-reload": "^1.4.0",
-    "ember-cli-windows-addon": "^1.3.1",
-    "phantomjs-prebuilt": "^2.1.7"
+    "ember-cli-windows-addon": "^1.3.1"
   },
   "dependencies": {
     "bower": "^1.7.9",
