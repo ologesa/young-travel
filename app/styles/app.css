@@ -1,13 +1,62 @@
 html {
-  background: url(/assets/images/background.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+    background: url(/assets/images/background.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
-.navbar.transparent {
-  background: transparent;
-  border-color: transparent;
-  color:white;
+body{
+    background-color: transparent;
+    color: whitesmoke;
+}
+html, body, body > .ember-view {
+    height: 100%;
 }
 
+.navbar.transparent {
+    background: transparent;
+    border-color: transparent;
+    color:white;
+}
+.navbar-default .navbar-nav > li > a, .navbar-default .navbar-nav > li > a:hover,  .navbar-default .navbar-nav > li > a:focus {
+    color: whitesmoke;
+}
+.navbar-default .navbar-nav > li > a:hover,  .navbar-default .navbar-nav > li > a:focus {
+    background-color: rgba(255,255,255,0.1);
+
+}
+.hBody{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.hRight{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+}
+.hTable{
+    display: table;
+}
+.hTable > .hHeader{
+    display: table-header-group;
+}
+.hTable > .hRow{
+    display: table-row;
+}
+.hTable > .hRow > div{
+    display: table-cell;
+    padding:5px;
+}
+
+
+.hTable > .hRow > div input{
+    height: 20px;
+    width: 120px;
+
+}

@@ -43,5 +43,6 @@ module.exports = function(environment) {
 
   }
 
+  console.log("Current environment: " + environment);
   return ENV;
 };

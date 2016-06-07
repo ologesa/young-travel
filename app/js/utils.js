@@ -6,4 +6,6 @@ function CollapseMenuAutomatically() {
   });
 }
 
-export default CollapseMenuAutomatically;
+export default {
+  CollapseMenuAutomatically : CollapseMenuAutomatically
+};
