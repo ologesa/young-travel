@@ -27,8 +27,8 @@
       <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="58" selection-start-line="11" selection-start-column="58" selection-end-line="11" selection-end-column="58" />
+            <state relative-caret-position="425">
+              <caret line="35" column="4" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -534,7 +534,7 @@
       <workItem from="1463685804043" duration="167000" />
       <workItem from="1463685992978" duration="31328000" />
       <workItem from="1464164812618" duration="4864000" />
-      <workItem from="1464175388535" duration="15000000" />
+      <workItem from="1464175388535" duration="15278000" />
     </task>
     <task id="LOCAL-00001" summary="webstorm">
       <created>1463687421206</created>
@@ -613,11 +613,18 @@
       <option name="project" value="LOCAL" />
       <updated>1465329323955</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="static page">
+      <created>1465329799902</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1465329799902</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52474000" />
+    <option name="totallyTimeSpent" value="52752000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="281" y="2" width="1400" height="1000" extended-state="0" />
@@ -1054,8 +1061,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="58" selection-start-line="11" selection-start-column="58" selection-end-line="11" selection-end-column="58" />
+        <state relative-caret-position="425">
+          <caret line="35" column="4" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="4" />
           <folding />
         </state>
       </provider>
