@@ -2,7 +2,6 @@ import Ember from 'ember';
 import Resolver from './resolver';
 import loadInitializers from 'ember-load-initializers';
 import config from './config/environment';
-import utils from './js/utils';
 
 let App;
 
@@ -13,18 +12,6 @@ App = Ember.Application.extend({
   podModulePrefix: config.podModulePrefix,
   Resolver
 });
-
-/*
-Ember.View.reopen({
-  didInsertElement : function(){
-    this._super();
-    Ember.run.scheduleOnce('afterRender', this, this.afterRenderEvent);
-  },
-  afterRenderEvent : function(){
-    utils.CollapseMenuAutomatically();
-  }
-});
-*/
 
 loadInitializers(App, config.modulePrefix);
 

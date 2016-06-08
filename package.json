@@ -9,13 +9,13 @@
   },
   "scripts": {
     "build": "ember build",
-    "start": "ember fastboot --port=${PORT} --serve-assets",
+    "start": "ember fastboot --port=${PORT} --serve-assets --environment=${NODE_ENV}",
     "test": "ember test",
     "postinstall": "bower install"
   },
   "repository": "",
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">=4.0.0"
   },
   "author": "",
   "license": "MIT",
