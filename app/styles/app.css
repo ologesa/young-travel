@@ -45,27 +45,10 @@ html, body, body > .ember-view {
     justify-content: flex-end;
     align-items: center;
     flex-grow: 1;
-}
-.hTable{
-    display: table;
-}
-.hTable > .hHeader{
-    display: table-header-group;
-}
-.hTable > .hRow{
-    display: table-row;
-}
-.hTable > .hRow > div{
-    display: table-cell;
-    padding:5px;
+    flex-wrap: wrap;
+    align-content: center;
 }
 
-
-.hTable > .hRow > div input{
-    height: 20px;
-    width: 120px;
-
-}
 
 .mHamburger{
     padding: 5px;
