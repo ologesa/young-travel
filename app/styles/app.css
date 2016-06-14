@@ -49,7 +49,19 @@ html, body, body > .ember-view {
     align-content: center;
 }
 
+.hRight > div > div {
+    padding:3px;
+    height: 20px;
+}
 
+.hRight>div:first-child,.hRight>div>div:first-child {
+    font-weight: bold;
+    background-color: rgba(0,0,0,0.2);
+}
+
+.hRight>div:first-child>div:first-child{
+    background-color: rgba(0,0,0,0);
+}
 .mHamburger{
     padding: 5px;
 }
