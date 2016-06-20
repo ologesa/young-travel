@@ -52,6 +52,7 @@ html, body, body > .ember-view {
 .hRight > div > div {
     padding:3px;
     height: 20px;
+    text-align: center;
 }
 
 .hRight>div:first-child,.hRight>div>div:first-child {
@@ -68,3 +69,48 @@ html, body, body > .ember-view {
 .mHamburger > i {
     padding: 5px;
 }
+
+
+.hHotelName{
+    border-radius: 4px;
+    border: 1px solid transparent;
+}
+
+.hHotelPrice{
+    width: 120px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    text-align: center;
+}
+
+.hHotelRating{
+    width: 120px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    text-align: center;
+}
+
+.hHotelTravel{
+    width: 120px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    text-align: center;
+}
+
+.hHotelAttraction{
+    width: 120px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    text-align: center;
+}
+
+.hRightAdvanced{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
