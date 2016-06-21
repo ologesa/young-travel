@@ -1,5 +1,6 @@
 import Ember from 'ember';
-const DELTA = 5;         // only report moves of greater than five pixels
+
+
 const DELTA_TIME = 10;  // only report moves every 100ms
 
 export default Ember.Component.extend({
@@ -11,6 +12,9 @@ export default Ember.Component.extend({
     lastX: null,
     lastY: null,
     lastTime: null,
+    width: 0,
+    marginLeft: 0,
+    initialMarginLeft: 0,
     imgId: "handle" + Math.floor(Math.random() * 100000) + 1,
     mouseMoveFunction : null,
     mouseUpFunction : null,
@@ -45,32 +49,34 @@ export default Ember.Component.extend({
 
             this.setProperties({ lastX: null, lastY: null, initialX : null});
 
+            var img = this.getImage(event);
+            this.$(img).removeClass("hSliderHandle");
             if(!this.mouseMoveFunction) {
-                this.mouseMoveFunction = this.mouseCurry(this.mousemove, {controller: this.controller, img: this.getImage(event)});
+                this.mouseMoveFunction = this.mouseCurry(this.mousemove, {controller: this.controller, img: img});
             }
 
             if(!this.mouseUpFunction) {
-                var data = {controller: this.controller, document: event.element.ownerDocument};
+                var data = {controller: this.controller, document: event.element.ownerDocument, img: img};
                 this.mouseUpFunction = this.mouseCurry(this.mouseup, data);
                 data.mouseMoveFunction = this.mouseMoveFunction;
                 data.mouseUpFunction = this.mouseUpFunction;
             }
 
-
+            this.set("width", this.$().width());
+            this.set("initialMarginLeft", this.get("marginLeft"));
             event.element.ownerDocument.addEventListener('mousemove', this.mouseMoveFunction);
             event.element.ownerDocument.addEventListener('mouseup', this.mouseUpFunction);
-            console.log("mouseDown");
         },
 
 
     },
     mouseup: function (event, data) {
+        data.controller.$(data.img).addClass("hSliderHandle");
         data.controller.setProperties({ lastX: null, lastY: null, initialX : null});
 
         data.document.removeEventListener('mousemove', data.mouseMoveFunction);
         data.document.removeEventListener('mouseup', data.mouseUpFunction);
 
-        console.log("mouseUp");
     },
     mousemove: function (event, data) {
 
@@ -86,13 +92,25 @@ export default Ember.Component.extend({
         }
 
 
-        if (Math.abs(screenX - lastX) < DELTA && Math.abs(screenY - lastY) < DELTA || now - lastTime < DELTA_TIME) {
+        if (now - lastTime < DELTA_TIME) {
             return;
         }
-        data.img.style.marginLeft = (lastX - initialX)  + "px";
-        data.controller.setProperties({ lastX: screenX, lastY: screenY, lastTime: now });
-        console.log("mouseMove "  + lastX + " " + initialX);
+
+        var marginLeft = data.controller.get("initialMarginLeft") + lastX - initialX;
+
+        if(marginLeft < 0) {
+            marginLeft = 0;
+        }
+
+        var usableWidth = data.controller.get("width") - data.img.width;
+        if(marginLeft > usableWidth) {
+            marginLeft = usableWidth;
+        }
+
+        data.img.style.marginLeft =  marginLeft + "px";
+        data.controller.setProperties({ lastX: screenX, lastY: screenY, lastTime: now, marginLeft : marginLeft});
 
     }
 
 });
+

@@ -1,0 +1,28 @@
+.hSlider{
+    width: 200px;
+
+}
+.hSlider > div{
+    width: 100%;
+}
+
+.hSlider .hSlider1{
+    display: flex;
+    justify-content: space-between;
+}
+
+.hSlider .hSlider2 {
+    background-color: rgba(0, 0,0,0.2);
+    border-radius: 9px;
+}
+.hSlider .hSlider1 > img, .hSlider .hSlider2 > img{
+    display: block;
+    max-width: 20px;
+    max-height: 30px;
+    width: auto;
+    height: auto;
+}
+
+.hSlider .hSliderHandle {
+    cursor: pointer;
+}

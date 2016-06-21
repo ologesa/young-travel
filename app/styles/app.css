@@ -1,3 +1,6 @@
+@import "index.css";
+@import "young-slider.css";
+
 html {
     background: url(/assets/images/background.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
@@ -39,37 +42,6 @@ html, body, body > .ember-view {
 }
 
 
-.hCenter{
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    justify-content: center;
-}
-.hRightMain {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-
-    flex-wrap: wrap;
-    align-content: center;
-
-}
-
-.hRightMain > div > div {
-    padding:3px;
-    height: 20px;
-    text-align: center;
-}
-
-.hRightMain>div:first-child,.hRight>div>div:first-child {
-    font-weight: bold;
-    background-color: rgba(0,0,0,0.2);
-}
-
-.hRightMain>div:first-child>div:first-child{
-    background-color: rgba(0,0,0,0);
-}
 .mHamburger{
     padding: 5px;
 }
@@ -78,70 +50,4 @@ html, body, body > .ember-view {
 }
 
 
-.hHotelName{
-    border-radius: 4px;
-    border: 1px solid transparent;
-}
 
-.hHotelPrice{
-    width: 120px;
-    border-radius: 4px;
-    border: 1px solid transparent;
-    text-align: center;
-}
-
-.hHotelRating{
-    width: 120px;
-    border-radius: 4px;
-    border: 1px solid transparent;
-    text-align: center;
-}
-
-.hHotelTravel{
-    width: 120px;
-    border-radius: 4px;
-    border: 1px solid transparent;
-    text-align: center;
-}
-
-.hHotelAttraction{
-    width: 120px;
-    border-radius: 4px;
-    border: 1px solid transparent;
-    text-align: center;
-}
-
-.hRightAdvanced{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: stretch;
-    text-align: right;
-}
-
-
-
-.hSlider{
-    width: 200px;
-
-}
-.hSlider > div{
-    width: 100%;
-}
-
-.hSlider .hSlider1{
-    display: flex;
-    justify-content: space-between;
-}
-
-.hSlider .hSlider2 {
-    background-color: rgba(0, 0,0,0.2);
-    border-radius: 9px;
-}
-.hSlider .hSlider1 > img, .hSlider .hSlider2 > img{
-    display: block;
-    max-width: 20px;
-    max-height: 30px;
-    width: auto;
-    height: auto;
-}
