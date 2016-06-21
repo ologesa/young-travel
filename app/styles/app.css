@@ -39,28 +39,35 @@ html, body, body > .ember-view {
 }
 
 
-.hRight{
+.hCenter{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: center;
+}
+.hRightMain {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
-    flex-grow: 1;
+
     flex-wrap: wrap;
     align-content: center;
+
 }
 
-.hRight > div > div {
+.hRightMain > div > div {
     padding:3px;
     height: 20px;
     text-align: center;
 }
 
-.hRight>div:first-child,.hRight>div>div:first-child {
+.hRightMain>div:first-child,.hRight>div>div:first-child {
     font-weight: bold;
     background-color: rgba(0,0,0,0.2);
 }
 
-.hRight>div:first-child>div:first-child{
+.hRightMain>div:first-child>div:first-child{
     background-color: rgba(0,0,0,0);
 }
 .mHamburger{
@@ -108,9 +115,33 @@ html, body, body > .ember-view {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    align-items: center;
-    flex-grow: 1;
-    flex-wrap: wrap;
-    align-content: center;
+    align-items: stretch;
+    text-align: right;
 }
 
+
+
+.hSlider{
+    width: 200px;
+
+}
+.hSlider > div{
+    width: 100%;
+}
+
+.hSlider .hSlider1{
+    display: flex;
+    justify-content: space-between;
+}
+
+.hSlider .hSlider2 {
+    background-color: rgba(0, 0,0,0.2);
+    border-radius: 9px;
+}
+.hSlider .hSlider1 > img, .hSlider .hSlider2 > img{
+    display: block;
+    max-width: 20px;
+    max-height: 30px;
+    width: auto;
+    height: auto;
+}
