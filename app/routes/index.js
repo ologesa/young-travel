@@ -22,6 +22,7 @@ export default Ember.Route.extend({
                 session_id = cookieValue;
             } else {
                 let moment = this.get('moment');
+                debugger;
                 session_id = Guid.compact(Guid.create());
                 cookieService.write('ys', session_id, {expires: moment.utc().add(1, 'y').toDate().toUTCString()});
             }
