@@ -3,6 +3,7 @@
     flex-direction: column;
     flex-grow: 1;
     justify-content: center;
+    padding-right: 20px;
 }
 
 .hRightMain {
@@ -14,9 +15,6 @@
     flex-wrap: wrap;
     align-content: center;
 
-}
-.hRightMain > div{
-    border-right: 1px solid rgba(255,255,255, 0.2);
 }
 
 .hRightMain > div > div {
@@ -83,4 +81,13 @@
     .hRightMain>div:first-child{
         display: none;
     }
+}
+
+.fab{
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+}
+.fab > img{
+    width: 50px;
 }
