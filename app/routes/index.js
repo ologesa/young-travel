@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import Guid from 'ember-cli-guid';
-
+import moment from 'moment';
 
 var service =  Ember.inject.service;
 
@@ -11,7 +11,7 @@ export default Ember.Route.extend({
         }
     },
     cookies: service(),
-    moment: service(),
+
     model(params){
         var session_id = params.ys;
 
@@ -21,7 +21,7 @@ export default Ember.Route.extend({
             if(cookieValue){
                 session_id = cookieValue;
             } else {
-                let moment = this.get('moment');
+                //let moment = this.get('moment');
                 debugger;
                 session_id = Guid.compact(Guid.create());
                 cookieService.write('ys', session_id, {expires: moment.utc().add(1, 'y').toDate().toUTCString()});
