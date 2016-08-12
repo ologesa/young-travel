@@ -21,8 +21,6 @@ export default Ember.Route.extend({
             if(cookieValue){
                 session_id = cookieValue;
             } else {
-                //let moment = this.get('moment');
-                debugger;
                 session_id = Guid.compact(Guid.create());
                 cookieService.write('ys', session_id, {expires: moment.utc().add(1, 'y').toDate().toUTCString()});
             }
@@ -36,9 +34,21 @@ export default Ember.Route.extend({
             });
         }, function(){
             return new Ember.RSVP.Promise(function(resolve/*, reject*/){
-                var sess = {id: session_id};
-                
-                store.push(store.normalize("session", sess));
+                var sess = store.createRecord("session", {id: session_id});
+
+                var hotel = store.createRecord('hotel', {
+                    id: 1,
+                    name: '',
+                    stars: 0,
+                    price: 0,
+                    currency: 'EUR',
+                    ratingBooking: 0,
+                    ratingTripAdvisor: 0
+                });
+                sess.get('hotels').pushObject(hotel);
+
+                hotel.save().then(function(){sess.save();});
+
                 resolve(sess);
             });
         });
