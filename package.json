@@ -13,7 +13,6 @@
     "test": "ember test",
     "postinstall": "bower install"
   },
-  "repository": "",
   "engines": {
     "node": ">=4.0.0"
   },
