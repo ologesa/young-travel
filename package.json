@@ -20,9 +20,10 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "ember-cli-test-loader": "1.1.0"
+
   },
   "dependencies": {
+    "ember-cli-test-loader": "1.1.0"
     "ember-cli-moment-shim": "2.0.0",
     "ember-moment": "7.0.0-beta.3",
     "bower": "^1.7.9",
