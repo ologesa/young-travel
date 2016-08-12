@@ -8,10 +8,11 @@
     "test": "tests"
   },
   "scripts": {
-    "build": "ember build",
+    "build": "ember build --environment=${NODE_ENV}",
     "start": "ember serve --port=${PORT} --environment=${NODE_ENV}",
     "test": "ember test",
-    "postinstall": "bower install"
+    "postinstall": "bower install",
+    "heroku-postbuild" : "ember build --environment=${NODE_ENV}"
   },
   "engines": {
     "node": ">=4.0.0"
