@@ -1,7 +1,11 @@
 import Ember from 'ember';
 
-export function hotelIndex(index/*, hash*/) {
-    var count = 1 + parseInt(index);
+export function hotelIndex(params/*, hash*/) {
+
+    if (params.length !== 1) {
+        throw new Error("Handlerbars Helper 'hotelIndex' needs 1 parameter");
+    }
+    var count = 1 + parseInt(params[0]);
 
     if (count === 0) {
         return '';

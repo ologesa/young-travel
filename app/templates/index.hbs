@@ -4,6 +4,7 @@
             <div>&nbsp;</div>
             <div>Hotel</div>
             <div>Price</div>
+            <div>Stars</div>
             <div>Booking</div>
             <div>Trip Advisor</div>
             <div>Travel time</div>
@@ -12,13 +13,20 @@
 
         {{#each model.hotels as |hotel index|}}
         <div>
-            <div>{{hotelIndex index}}{{#if index}}<img {{action "click" "delete" hotel.id}} src="assets/images/delete.png" />{{/if}} </div>
-            <div>{{input class="hHotelName" type="text" value=(mut (get hotel "name")) }}</div>
-            <div>{{input  class="hHotelPrice" type="number"   value="{{hotel.price}}"   }}</div>
-            <div>{{input class="hHotelRating" type="text" value="3.9" }}</div>
-            <div>{{input class="hHotelTravel" type="text" value="1h" }}</div>
-            <div>{{input class="hHotelRating" type="text" value="4" }}</div>
-            <div>{{input class="hHotelAttraction" type="text" value="Ciuciu" }}</div>
+            <div>{{hotelIndex index}}{{#if index}}<img {{action "click" "delete" hotel.id}} src="assets/images/delete.png" />{{/if}}  </div>
+            <div>{{input class="hHotelName" type="text" value=(mut (get hotel "name")) placeholder=(unless (get hotel "name") "hotel name") focus-out=(action "blur" 'name' hotel.id ) }}</div>
+            <div>{{input  class="hHotelPrice" type="number"  min="1" max="99999" step="5" value=(mut (get hotel "price")) placeholder=(unless (strToNum (get hotel "price")) "price in EUR") focus-out=(action "blur" 'price' hotel.id ) }}</div>
+            <div>{{input class="hHotelRating" type="number" min="1" max="5" step="0.1" value=(mut (get hotel "stars")) placeholder=(unless (strToNum (get hotel "price")) "stars") focus-out=(action "blur" 'stars' hotel.id ) }}</div>
+            <div>{{input class="hHotelRating" type="number" min="1" max="5" step="0.1" value=(mut (get hotel "ratingBooking")) placeholder=(unless (strToNum (get hotel "ratingBooking")) "rating booking.com") focus-out=(action "blur" 'ratingBooking' hotel.id ) }}</div>
+            <div>{{input class="hHotelRating" type="number" min="1" max="5" step="0.1" value=(mut (get hotel "ratingTripAdvisor")) placeholder=(unless (strToNum (get hotel "ratingTripAdvisor")) "rating TripAdvisor") focus-out=(action "blur" 'ratingTripAdvisor' hotel.id ) }}</div>
+            <div>{{input class="hHotelTravel" type="number" min="1" max="999" step="0.5" value=(mut (get hotel "travelTime")) placeholder=(unless (strToNum (get hotel "travelTime")) "travel time (h)") focus-out=(action "blur" 'travelTime' hotel.id ) }}</div>
+            <div><select class="hHotelAttraction" onchange={{action "change" 'attractions' hotel.id}} >
+                <option value="1" selected={{compare 1 hotel.attractions}}>terrible attractions</option>
+                <option value="2" selected={{compare 2 hotel.attractions}}>poor attractions</option>
+                <option value="3" selected={{compare 3 hotel.attractions}}>good attractions</option>
+                <option value="4" selected={{compare 4 hotel.attractions}}>very good attractions</option>
+                <option value="5" selected={{compare 5 hotel.attractions}}>excellent attractions</option>
+                </select></div>
         </div>
         {{/each}}
     </div>

@@ -39,11 +39,12 @@ export default Ember.Route.extend({
                 var hotel = store.createRecord('hotel', {
                     id: 1,
                     name: '',
-                    stars: 0,
-                    price: 0,
+                    stars: '',
+                    price: '',
                     currency: 'EUR',
-                    ratingBooking: 0,
-                    ratingTripAdvisor: 0
+                    ratingBooking: '',
+                    ratingTripAdvisor: '',
+                    attractions: 3
                 });
                 sess.get('hotels').pushObject(hotel);
 

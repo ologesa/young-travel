@@ -13,7 +13,24 @@ export default Ember.Controller.extend({
                     deleteF.call(this, element);
                     break;
             }
+        },
+        blur : function(evt, element){
+            var saveHotel = this.get('saveHotel');
+            saveHotel.call(this, element);
+        },
+        change: function(evt, element, event){
+            debugger;
+            var value = event.target.options[event.target.selectedIndex].value;
+
+
+            var setSelectedAttraction = this.get('setSelectedAttraction');
+            setSelectedAttraction.call(this, element, value);
+
+            var saveHotel = this.get('saveHotel');
+            saveHotel.call(this, element);
         }
+
+
     },
     fabAdd: function () {
         var model = this.get("model");
@@ -28,11 +45,12 @@ export default Ember.Controller.extend({
         var hotel = store.createRecord('hotel', {
             id: lastId + 1,
             name: '',
-            stars: 0,
-            price: 0,
+            stars: '',
+            price: '',
             currency: 'EUR',
-            ratingBooking: 0,
-            ratingTripAdvisor: 0
+            ratingBooking: '',
+            ratingTripAdvisor: '',
+            attractions: 3
         });
         sess.get('hotels').pushObject(hotel);
 
@@ -45,8 +63,25 @@ export default Ember.Controller.extend({
         var sess = store.peekRecord('session', model.id);
         sess.get('hotels').find(x => x.id === element).destroyRecord();
 
+    },
+
+    setSelectedAttraction: function (id, value){
+        var model = this.get("model");
+        var store = this.get('store');
+        var sess = store.peekRecord('session', model.id);
+        var hotel = sess.get('hotels').find(x => x.id === id);
+        hotel.set("attractions", value);
+    },
+
+    saveHotel: function(id){
+        var model = this.get("model");
+        var store = this.get('store');
+        var sess = store.peekRecord('session', model.id);
+        var hotel = sess.get('hotels').find(x => x.id === id);
+        if(hotel.hasDirtyAttributes){
+            hotel.save();
+        }
     }
 });
-
 
 
