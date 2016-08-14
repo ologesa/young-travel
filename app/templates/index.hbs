@@ -32,9 +32,13 @@
     </div>
     <div class="hRightAdvanced">
         {{young-slider className="hSlider"}}
+
     </div>
+    <div class="hRightAdvanced hCompare">
+    <div>{{#if (compare model.hotels.length ">" 1)}}<img src="assets/images/compare.png" />{{/if}}</div><div>{{#if (compare model.hotels.length ">" 1)}}Compare{{else}}Add one more hotel to compare{{/if}}</div>
+    </div>
+
 </div>
 <div class="fab">
-
     <img {{action "click" "fab-add"}} src="assets/images/add.png" alt="add"/>
 </div>

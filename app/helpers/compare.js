@@ -2,13 +2,13 @@ import Ember from 'ember';
 
 export function compare(params /*lvalue, operator, rvalue, options*/) {
     var lvalue, rvalue, operator, result;
-
-    if (arguments.length === 2) {
+    
+    if (params.length === 2) {
         lvalue = params[0];
         rvalue = params[1];
         operator = "===";
 
-    } else if (arguments.length === 3) {
+    } else if (params.length === 3) {
         lvalue = params[0];
         operator = params[1];
         rvalue = params[2];
