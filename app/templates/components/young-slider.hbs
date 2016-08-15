@@ -1,2 +1,2 @@
 <div class="hSlider1"><img src="/assets/images/price.png"><img src="/assets/images/quality.png"></div>
-<div class="hSlider2"><img id="{{imgId}}"  class="hSliderHandle" {{action "mousedown" this on="mouseDown"}}  src="/assets/images/slide.png"></div>
+<div class="hSlider2" {{action "sliderClick" this on="mouseDown"}}><img id="{{imgId}}"  class="hSliderHandle" {{action "eventDown" "mouse" this on="mouseDown" }}  {{action "eventDown" "touch" this on="touchStart" }}   src="/assets/images/slide.png"></div>

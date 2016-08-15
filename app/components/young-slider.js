@@ -16,12 +16,12 @@ export default Ember.Component.extend({
     marginLeft: 0,
     initialMarginLeft: 0,
     imgId: "handle" + Math.floor(Math.random() * 100000) + 1,
-    mouseMoveFunction : null,
-    mouseUpFunction : null,
+    eventMoveFunction : null,
+    eventUpFunction : null,
     getImage(event){
         var viewElements = event.element;
         var images = viewElements.getElementsByTagName("img");
-        var imgId = this.imgId;
+        var imgId = this.get("imgId");
 
         var img = null;
         Ember.$.each(images, function (index, item) {
@@ -35,60 +35,69 @@ export default Ember.Component.extend({
         return img;
     },
 
-    mouseCurry(eventFunction, data){
+    eventCurry(eventFunction, data){
 
+        var that = this;
         return function (event) {
-            eventFunction(event, data);
+             eventFunction.call(that, event, data);
         };
     },
 
     actions : {
 
         // Set up and tear down event listeners.
-        mousedown: function (event) {
+        eventDown: function (method, event) {
 
             this.setProperties({ lastX: null, lastY: null, initialX : null});
 
-            var img = this.getImage(event);
+            var eventMove = this.get("eventMove");
+            var eventUp = this.get("eventUp");
+            var eventCurry = this.get("eventCurry");
+            var getImage = this.get("getImage");
+
+            var img = getImage.call(this, event);
             this.$(img).removeClass("hSliderHandle");
-            if(!this.mouseMoveFunction) {
-                this.mouseMoveFunction = this.mouseCurry(this.mousemove, {controller: this.controller, img: img});
+            if(!this.eventMoveFunction) {
+                this.eventMoveFunction = eventCurry.call(this, eventMove, {img: img});
             }
 
-            if(!this.mouseUpFunction) {
-                var data = {controller: this.controller, document: event.element.ownerDocument, img: img};
-                this.mouseUpFunction = this.mouseCurry(this.mouseup, data);
-                data.mouseMoveFunction = this.mouseMoveFunction;
-                data.mouseUpFunction = this.mouseUpFunction;
+            if(!this.eventUpFunction) {
+                var data = {document: event.element.ownerDocument, img: img, method: method};
+                this.eventUpFunction = eventCurry.call(this, eventUp, data);
+                data.eventMoveFunction = this.eventMoveFunction;
+                data.eventUpFunction = this.eventUpFunction;
             }
 
             this.set("width", this.$().width());
             this.set("initialMarginLeft", this.get("marginLeft"));
-            event.element.ownerDocument.addEventListener('mousemove', this.mouseMoveFunction);
-            event.element.ownerDocument.addEventListener('mouseup', this.mouseUpFunction);
+            event.element.ownerDocument.addEventListener(method === "mouse" ?  "mousemove" : "touchMove", this.eventMoveFunction);
+            event.element.ownerDocument.addEventListener(method === "mouse" ? "mouseup" : "touchEnd", this.eventUpFunction);
+
+            return false;
         },
+        sliderClick: function(event){
 
+        }
+    },
+    eventUp: function (event, data) {
+        this.$(data.img).addClass("hSliderHandle");
+        this.setProperties({ lastX: null, lastY: null, initialX : null});
+
+        data.document.removeEventListener(data.method === "mouse" ?  "mousemove" : "touchMove", data.eventMoveFunction);
+        data.document.removeEventListener(data.method === "mouse" ? "mouseup" : "touchEnd" + 'up', data.eventUpFunction);
 
     },
-    mouseup: function (event, data) {
-        data.controller.$(data.img).addClass("hSliderHandle");
-        data.controller.setProperties({ lastX: null, lastY: null, initialX : null});
-
-        data.document.removeEventListener('mousemove', data.mouseMoveFunction);
-        data.document.removeEventListener('mouseup', data.mouseUpFunction);
-
-    },
-    mousemove: function (event, data) {
+    eventMove: function (event, data) {
 
         var { screenX, screenY } = event;
-        var { lastX, lastY, initialX, lastTime } = data.controller.getProperties('lastX', 'lastY', 'initialX',  'lastTime');
+        var { lastX, lastY, initialX, lastTime } = this.getProperties('lastX', 'lastY', 'initialX',  'lastTime');
         var now = +new Date();
 
         if(!lastX || !lastY || !initialX ){
             lastX = screenX;
             initialX = screenX;
             lastY = screenY;
-            data.controller.setProperties({ lastX: screenX, lastY: screenY, initialX : initialX, lastTime: now });
+            this.setProperties({ lastX: screenX, lastY: screenY, initialX : initialX, lastTime: now });
         }
 
 
@@ -96,19 +105,19 @@ export default Ember.Component.extend({
             return;
         }
 
-        var marginLeft = data.controller.get("initialMarginLeft") + lastX - initialX;
+        var marginLeft = this.get("initialMarginLeft") + lastX - initialX;
 
         if(marginLeft < 0) {
             marginLeft = 0;
         }
 
-        var usableWidth = data.controller.get("width") - data.img.width;
+        var usableWidth = this.get("width") - data.img.width;
         if(marginLeft > usableWidth) {
             marginLeft = usableWidth;
         }
 
         data.img.style.marginLeft =  marginLeft + "px";
-        data.controller.setProperties({ lastX: screenX, lastY: screenY, lastTime: now, marginLeft : marginLeft});
+        this.setProperties({ lastX: screenX, lastY: screenY, lastTime: now, marginLeft : marginLeft});
 
     }
 
