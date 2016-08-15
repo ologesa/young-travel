@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 
-const DELTA_TIME = 10;  // only report moves every 100ms
+const DELTA_TIME = 10;  // only report moves every 10ms
 
 export default Ember.Component.extend({
     classNameBindings : ["className"],
@@ -13,8 +13,8 @@ export default Ember.Component.extend({
     lastY: null,
     lastTime: null,
     width: 0,
-    marginLeft: 0,
-    initialMarginLeft: 0,
+    marginLeft: 90,
+    initialMarginLeft: 90,
     imgId: "handle" + Math.floor(Math.random() * 100000) + 1,
     eventMoveFunction : null,
     eventUpFunction : null,
@@ -71,8 +71,8 @@ export default Ember.Component.extend({
 
             this.set("width", this.$().width());
             this.set("initialMarginLeft", this.get("marginLeft"));
-            event.element.ownerDocument.addEventListener(method === "mouse" ?  "mousemove" : "touchMove", this.eventMoveFunction);
-            event.element.ownerDocument.addEventListener(method === "mouse" ? "mouseup" : "touchEnd", this.eventUpFunction);
+            event.element.ownerDocument.addEventListener(method === "mouse" ?  "mousemove" : "touchmove", this.eventMoveFunction);
+            event.element.ownerDocument.addEventListener(method === "mouse" ? "mouseup" : "touchend", this.eventUpFunction);
 
             return false;
         },
@@ -81,18 +81,31 @@ export default Ember.Component.extend({
         }
     },
     eventUp: function (event, data) {
+        //event.preventDefault();
         this.$("#message").html("eventUp " + data.method);
         this.$(data.img).addClass("hSliderHandle");
+
         this.setProperties({ lastX: null, lastY: null, initialX : null});
 
-        data.document.removeEventListener(data.method === "mouse" ?  "mousemove" : "touchMove", data.eventMoveFunction);
-        data.document.removeEventListener(data.method === "mouse" ? "mouseup" : "touchEnd" + 'up', data.eventUpFunction);
+        data.document.removeEventListener(data.method === "mouse" ?  "mousemove" : "touchmove", data.eventMoveFunction);
+        data.document.removeEventListener(data.method === "mouse" ? "mouseup" : "touchend" + 'up', data.eventUpFunction);
 
     },
     eventMove: function (event, data) {
+        //event.preventDefault();
+        var screenX, screenY;
 
-        this.$("#message").html("eventMove " + data.method);
-        var { screenX, screenY } = event;
+
+        if(data.method === "mouse") {
+            screenX = event.screenX;
+            screenY = event.screenY;
+        } else {
+            var touch = event.touches[0] || event.originalEvent.touches[0] || event.originalEvent.changedTouches[0];
+
+            screenX = touch.screenX;
+            screenY = touch.screenY;
+        }
+        this.$("#message").html(" eventMove " + data.method + " " + screenX ? screenX : "undefined" + ", " + screenY ? screenY : "undefined") ;
         var { lastX, lastY, initialX, lastTime } = this.getProperties('lastX', 'lastY', 'initialX',  'lastTime');
         var now = +new Date();
 
@@ -108,6 +121,7 @@ export default Ember.Component.extend({
             return;
         }
 
+        
         var marginLeft = this.get("initialMarginLeft") + lastX - initialX;
 
         if(marginLeft < 0) {

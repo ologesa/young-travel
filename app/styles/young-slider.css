@@ -26,3 +26,7 @@
 .hSlider .hSliderHandle {
     cursor: pointer;
 }
+
+.hSlider .hSliderHandle2{
+    margin-left: 90px;
+}
