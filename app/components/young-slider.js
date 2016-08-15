@@ -59,7 +59,7 @@ export default Ember.Component.extend({
             var img = getImage.call(this, event);
             this.$(img).removeClass("hSliderHandle");
             if(!this.eventMoveFunction) {
-                this.eventMoveFunction = eventCurry.call(this, eventMove, {img: img});
+                this.eventMoveFunction = eventCurry.call(this, eventMove, {img: img, method: method });
             }
 
             if(!this.eventUpFunction) {
@@ -91,6 +91,7 @@ export default Ember.Component.extend({
     },
     eventMove: function (event, data) {
 
+        this.$("#message").html("eventMove " + data.method);
         var { screenX, screenY } = event;
         var { lastX, lastY, initialX, lastTime } = this.getProperties('lastX', 'lastY', 'initialX',  'lastTime');
         var now = +new Date();
