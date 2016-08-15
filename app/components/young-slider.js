@@ -48,6 +48,7 @@ export default Ember.Component.extend({
         // Set up and tear down event listeners.
         eventDown: function (method, event) {
 
+            this.$("#message").html("eventDown " + method);
             this.setProperties({ lastX: null, lastY: null, initialX : null});
 
             var eventMove = this.get("eventMove");
@@ -80,6 +81,7 @@ export default Ember.Component.extend({
         }
     },
     eventUp: function (event, data) {
+        this.$("#message").html("eventUp " + data.method);
         this.$(data.img).addClass("hSliderHandle");
         this.setProperties({ lastX: null, lastY: null, initialX : null});
 
