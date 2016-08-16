@@ -35,7 +35,7 @@
 
     </div>
     <div class="hRightAdvanced hCompare">
-    <div>{{#if (compare model.hotels.length ">" 1)}}<img src="assets/images/compare.png" />{{/if}}</div><div>{{#if (compare model.hotels.length ">" 1)}}Compare{{else}}Add one more hotel to compare{{/if}}</div>
+        <div>{{#if (compare model.hotels.length ">" 1)}}{{#link-to "comparision"}}<img src="assets/images/compare.png" />{{/link-to}}{{/if}}</div><div>{{#if (compare model.hotels.length ">" 1)}}{{#link-to "comparision"}}Compare{{/link-to}}{{else}}Add one more hotel to compare{{/if}}</div>
     </div>
 
 </div>
