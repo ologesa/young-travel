@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export function compare(params /*lvalue, operator, rvalue, options*/) {
     var lvalue, rvalue, operator, result;
-    
+
     if (params.length === 2) {
         lvalue = params[0];
         rvalue = params[1];
@@ -18,13 +18,13 @@ export function compare(params /*lvalue, operator, rvalue, options*/) {
 
     var operators = {
         '==': function (l, r) {
-            return l == r;
+            return l == r; // jshint ignore:line
         },
         '===': function (l, r) {
             return l === r;
         },
         '!=': function (l, r) {
-            return l != r;
+            return l != r; // jshint ignore:line
         },
         '!==': function (l, r) {
             return l !== r;
@@ -42,7 +42,7 @@ export function compare(params /*lvalue, operator, rvalue, options*/) {
             return l >= r;
         },
         'typeof': function (l, r) {
-            return typeof l == r;
+            return typeof l == r; // jshint ignore:line
         }
     };
 

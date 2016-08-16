@@ -1,8 +1,9 @@
 import Ember from 'ember';
 
 
-const DELTA_TIME = 10;  // only report moves every 10ms
+const DELTA_TIME = 1;  // only report moves every 10ms
 
+//noinspection JSUnusedGlobalSymbols
 export default Ember.Component.extend({
     classNameBindings : ["className"],
     
@@ -44,27 +45,23 @@ export default Ember.Component.extend({
     },
 
     actions : {
-
-        // Set up and tear down event listeners.
         eventDown: function (method, event) {
 
-            this.$("#message").html("eventDown " + method);
             this.setProperties({ lastX: null, lastY: null, initialX : null});
 
-            var eventMove = this.get("eventMove");
-            var eventUp = this.get("eventUp");
+
             var eventCurry = this.get("eventCurry");
             var getImage = this.get("getImage");
 
             var img = getImage.call(this, event);
             this.$(img).removeClass("hSliderHandle");
             if(!this.eventMoveFunction) {
-                this.eventMoveFunction = eventCurry.call(this, eventMove, {img: img, method: method });
+                this.eventMoveFunction = eventCurry.call(this, this.get("eventMove"), {img: img, method: method });
             }
 
             if(!this.eventUpFunction) {
                 var data = {document: event.element.ownerDocument, img: img, method: method};
-                this.eventUpFunction = eventCurry.call(this, eventUp, data);
+                this.eventUpFunction = eventCurry.call(this, this.get("eventUp"), data);
                 data.eventMoveFunction = this.eventMoveFunction;
                 data.eventUpFunction = this.eventUpFunction;
             }
@@ -75,14 +72,10 @@ export default Ember.Component.extend({
             event.element.ownerDocument.addEventListener(method === "mouse" ? "mouseup" : "touchend", this.eventUpFunction);
 
             return false;
-        },
-        sliderClick: function(event){
-
         }
     },
     eventUp: function (event, data) {
-        //event.preventDefault();
-        this.$("#message").html("eventUp " + data.method);
+
         this.$(data.img).addClass("hSliderHandle");
 
         this.setProperties({ lastX: null, lastY: null, initialX : null});
@@ -91,29 +84,29 @@ export default Ember.Component.extend({
         data.document.removeEventListener(data.method === "mouse" ? "mouseup" : "touchend" + 'up', data.eventUpFunction);
 
     },
-    eventMove: function (event, data) {
+    eventMove: function (event, data){
+        this.moveToEventCoordonates.call(this, event, data);
+    },
+
+    moveToEventCoordonates: function (event, data) {
         //event.preventDefault();
         var screenX, screenY;
 
 
         if(data.method === "mouse") {
             screenX = event.screenX;
-            screenY = event.screenY;
         } else {
             var touch = event.touches[0] || event.originalEvent.touches[0] || event.originalEvent.changedTouches[0];
 
             screenX = touch.screenX;
-            screenY = touch.screenY;
         }
-        this.$("#message").html(" eventMove " + data.method + " " + screenX ? screenX : "undefined" + ", " + screenY ? screenY : "undefined") ;
-        var { lastX, lastY, initialX, lastTime } = this.getProperties('lastX', 'lastY', 'initialX',  'lastTime');
+        var { initialX, lastTime } = this.getProperties('initialX',  'lastTime');
         var now = +new Date();
 
-        if(!lastX || !lastY || !initialX ){
-            lastX = screenX;
+        this.setProperties({lastTime: now });
+        if(!initialX ){
             initialX = screenX;
-            lastY = screenY;
-            this.setProperties({ lastX: screenX, lastY: screenY, initialX : initialX, lastTime: now });
+            this.setProperties({ initialX : initialX});
         }
 
 
@@ -122,7 +115,7 @@ export default Ember.Component.extend({
         }
 
         
-        var marginLeft = this.get("initialMarginLeft") + lastX - initialX;
+        var marginLeft = this.get("initialMarginLeft") + screenX - initialX;
 
         if(marginLeft < 0) {
             marginLeft = 0;
@@ -134,9 +127,8 @@ export default Ember.Component.extend({
         }
 
         data.img.style.marginLeft =  marginLeft + "px";
-        this.setProperties({ lastX: screenX, lastY: screenY, lastTime: now, marginLeft : marginLeft});
+        this.setProperties({marginLeft : marginLeft});
 
     }
-
 });
 

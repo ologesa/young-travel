@@ -19,7 +19,6 @@ export default Ember.Controller.extend({
             saveHotel.call(this, element);
         },
         change: function(evt, element, event){
-            debugger;
             var value = event.target.options[event.target.selectedIndex].value;
 
 
